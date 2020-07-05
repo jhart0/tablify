@@ -1,0 +1,18 @@
+stages:
+  - build
+  - test
+
+build:
+  stage: build
+  script:
+    - npm build
+
+test:lint:
+  stage: test
+  script:
+    - npm lint-check
+ 
+test:unit:
+  stage: test
+  script:
+    - npm test
