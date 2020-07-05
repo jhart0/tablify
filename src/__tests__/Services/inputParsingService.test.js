@@ -1,5 +1,7 @@
 import inputParsingService from '../../Services/inputParsingService';
 
+describe( 'InputParsingService Tests', () => {
+
 test('removes no braces', () => {
   const expected = "some text"
   const actual = inputParsingService.removeBraces(expected);
@@ -75,3 +77,5 @@ test('sanitizes input into array of strings', () => {
     const actual = inputParsingService.parseInputString(input);
     expect(expected).toEqual(actual);
   });
+
+});
