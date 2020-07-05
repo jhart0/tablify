@@ -2,6 +2,9 @@ stages:
   - build
   - test
 
+image:
+ - node
+
 build:
   stage: build
   script:
