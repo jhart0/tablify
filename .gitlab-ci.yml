@@ -7,14 +7,14 @@ image: node
 build:
   stage: build
   script:
-    - npm build
+    - npm run build
 
 test:lint:
   stage: test
   script:
-    - npm lint-check
+    - npm run lint-check
  
 test:unit:
   stage: test
   script:
-    - npm test
+    - npm run test
