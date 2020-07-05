@@ -7,14 +7,19 @@ image: node
 build:
   stage: build
   script:
+    - npm i
     - npm run build
 
 test:lint:
+  dependencies:
+    - build
   stage: test
   script:
     - npm run lint-check
  
 test:unit:
+  dependencies:
+    - build
   stage: test
   script:
     - npm run test
