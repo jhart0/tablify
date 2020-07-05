@@ -1,11 +1,17 @@
+import { strict } from "assert"
+import { stringify } from "querystring"
+
 export default class InputParsingService {
   static parseInputString(input: string) {
-    input = this.removeBeforeBrace(input)
-    input = this.removeBrace(input)
+    if (input.includes('Namespace')) {
+      input = this.removeBeforeBrace(input)
+      input = this.removeBrace(input)
+    }
     input = this.removeBeforeBrace(input)
     input = this.removeBraces(input)
-    const lines = this.splitLines(input)
-    this.trimAllStrings(lines)
+    let lines = this.splitLines(input)
+    lines = this.removeAutoProperties(lines)
+    lines = this.trimAllStrings(lines)
     return lines
   }
 
@@ -27,5 +33,14 @@ export default class InputParsingService {
 
   static trimAllStrings(input: string[]) {
     return input.map(Function.prototype.call, String.prototype.trim)
+  }
+
+  static removeAutoProperties(input: string[]) {
+    input = input.map((x) => {
+      return x.replace(/get;/g, '')
+    })
+    return input.map((x) => {
+      return x.replace(/set;/g, '')
+    })
   }
 }
