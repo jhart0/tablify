@@ -24,4 +24,4 @@ test:unit:
   stage: test
   script:
     - npm i
-    - npm run test
+    - npm run ci-test

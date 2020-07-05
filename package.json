@@ -20,12 +20,19 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "ci-test": "npm run test -- --coverage --watchAll=false",
     "eject": "react-scripts eject",
     "lint": "tslint -c tslint.json src/**/*.{ts,tsx} --fix --format verbose",
     "lint-check": "tslint-config-prettier-check ./tslint.json"
   },
   "eslintConfig": {
     "extends": "react-app"
+  },
+  "jest": {
+    "coveragePathIgnorePatterns" : [
+      "serviceWorker.js",
+      "index.js"
+    ]
   },
   "browserslist": {
     "production": [
