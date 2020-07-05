@@ -15,6 +15,7 @@ test:lint:
     - build
   stage: test
   script:
+    - npm i
     - npm run lint-check
  
 test:unit:
@@ -22,4 +23,5 @@ test:unit:
     - build
   stage: test
   script:
+    - npm i
     - npm run test
