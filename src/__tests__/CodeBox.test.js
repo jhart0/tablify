@@ -27,7 +27,10 @@ test('renders text input box', () => {
 });
 
 test('changes state of text input box', () => {
-  wrapper.find('#outlined-multiline-static-code-box').props().onChange('a new value');
+  const event = {
+    target: { value: 'a new value' }
+  };
+  wrapper.find('#outlined-multiline-static-code-box').simulate('change', event);
    expect(setState).toHaveBeenCalledWith('a new value');
 });
 

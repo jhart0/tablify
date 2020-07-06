@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ChangeEvent } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 
@@ -15,8 +15,8 @@ export default function CodeBox() {
   const classes = useStyles()
   const [value, setValue] = React.useState('Paste Code Here to convert')
 
-  const handleChange = (inputValue: string) => {
-    setValue(inputValue)
+  const handleChange = (event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+    setValue(event.target.value)
   }
 
   return (
