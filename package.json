@@ -29,7 +29,7 @@
     "extends": "react-app"
   },
   "jest": {
-    "coveragePathIgnorePatterns" : [
+    "coveragePathIgnorePatterns": [
       "serviceWorker.js",
       "index.js"
     ]
@@ -47,6 +47,8 @@
     ]
   },
   "devDependencies": {
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
     "material-ui": "^0.20.2",
     "prettier": "^2.0.5",
     "tslint": "^6.1.2",

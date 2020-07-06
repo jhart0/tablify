@@ -15,8 +15,8 @@ export default function CodeBox() {
   const classes = useStyles()
   const [value, setValue] = React.useState('Paste Code Here to convert')
 
-  const handleChange = (event: { target: { value: React.SetStateAction<string> } }) => {
-    setValue(event.target.value)
+  const handleChange = (inputValue: string) => {
+    setValue(inputValue)
   }
 
   return (
@@ -29,7 +29,7 @@ export default function CodeBox() {
         rows={4}
         variant="outlined"
         value={value}
-        onChange={handleChange}
+        onChange={(handleChange)}
       />
     </div>
   )
