@@ -29,7 +29,7 @@ export default function CodeBox() {
         rows={4}
         variant="outlined"
         value={value}
-        onChange={(handleChange)}
+        onChange={handleChange}
       />
     </div>
   )
