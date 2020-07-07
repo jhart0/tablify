@@ -1,3 +1,5 @@
+import IProperty from '../Contracts/IProperty'
+
 export default class TableBuildingService {
   static BuildTableFromProperties(name: string, properties: IProperty[]) {
     let definition = this.AddCreateTablePrefix(name)
