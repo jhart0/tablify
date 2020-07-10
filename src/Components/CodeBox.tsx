@@ -11,12 +11,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export default function CodeBox() {
+type CodeBoxProps = {
+  updateOutput: (val: string) => void
+}
+
+const CodeBox = ({ updateOutput }: CodeBoxProps) => {
   const classes = useStyles()
   const [value, setValue] = React.useState('Paste Code Here to convert')
 
   const handleChange = (event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-    setValue(event.target.value)
+    const inputValue = event.target.value
+    setValue(inputValue)
+    updateOutput(inputValue)
   }
 
   return (
@@ -34,3 +40,5 @@ export default function CodeBox() {
     </div>
   )
 }
+
+export default CodeBox

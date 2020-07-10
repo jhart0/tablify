@@ -11,7 +11,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export default function OutputBox(output: string) {
+type OutputBoxProps = {
+  output: string
+}
+
+const OutputBox = ({ output }: OutputBoxProps) => {
   const classes = useStyles()
 
   return (
@@ -19,7 +23,7 @@ export default function OutputBox(output: string) {
       <TextField
         id="outlined-multiline-static-output-box"
         data-testid="outlined-multiline-static-output-box"
-        label="Paste Code Here"
+        label="Converted Code"
         multiline={true}
         rows={4}
         variant="outlined"
@@ -28,3 +32,5 @@ export default function OutputBox(output: string) {
     </div>
   )
 }
+
+export default OutputBox

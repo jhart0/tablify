@@ -3,8 +3,8 @@ import tableBuildingService from '../../Services/tableBuildingService';
 describe( 'TableBuildingService Tests', () => {
 
 test('returns create table script', () => {
-  const input = [{propertyName: "thing", propertyType: "int"}]
-  const expected = "create table test \n (\nthing int \n )"
+  const input = [{propertyName: "thing", propertyType: "int"}, {propertyName: "thingB", propertyType: "string"}]
+  const expected = "create table test \n (\nthing int,\nthingB nvarchar \n )"
   const actual = tableBuildingService.BuildTableFromProperties("test", input);
   expect(expected).toEqual(actual);
 });

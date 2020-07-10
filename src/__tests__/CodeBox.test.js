@@ -10,8 +10,11 @@ const setState = jest.fn();
   const useStateSpy = jest.spyOn(React, 'useState')
   useStateSpy.mockImplementation((init) => [init, setState]);
 
+  const handleChange = (val) => {
+  }
+
   beforeEach(() => {
-    wrapper = shallow(<CodeBox />);
+    wrapper = shallow(<CodeBox updateOutput={handleChange}/>);
   });
 
   afterEach(() => {
@@ -21,7 +24,7 @@ const setState = jest.fn();
 describe( 'CodeBox Tests', () => {
 
 test('renders text input box', () => {
-  const { getByTestId } = render(<CodeBox />);
+  const { getByTestId } = render(<CodeBox updateOutput={handleChange}/>);
   const sut = getByTestId(/outlined-multiline-static-code-box/i);
   expect(sut).toBeInTheDocument();
 });

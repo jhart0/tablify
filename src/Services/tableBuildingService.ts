@@ -5,8 +5,9 @@ export default class TableBuildingService {
   static BuildTableFromProperties(name: string, properties: IProperty[]) {
     let definition = this.AddCreateTablePrefix(name)
     for (const property of properties) {
-      definition = definition + '\n' + this.AddPropertiesAsColumns(property)
+      definition = definition + '\n' + this.AddPropertiesAsColumns(property) + ','
     }
+    definition = definition.substring(0, definition.length - 1)
     definition = this.AddEndParenthesis(definition)
     return definition
   }
