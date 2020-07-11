@@ -1,6 +1,6 @@
 export default class InputParsingService {
   static parseInputString(input: string) {
-    if (input.includes('Namespace')) {
+    if (input.toLowerCase().includes('namespace')) {
       input = this.removeBeforeBrace(input)
       input = this.removeBrace(input)
     }
