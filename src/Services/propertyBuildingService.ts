@@ -5,9 +5,6 @@ export default class PropertyBuildingService {
     const properties: IProperty[] = []
     for (let i of inputStrings) {
       i = i.trim()
-      if (i === '\n') {
-        continue
-      }
       let parts = this.splitIntoPropertyFields(i)
       if (parts.length === 3) {
         parts = this.removeAccessModifier(parts)

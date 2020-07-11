@@ -1,7 +1,6 @@
 import React from 'react'
 import './App.css'
 import CodeBox from './Components/CodeBox'
-import { Button } from '@material-ui/core'
 import OutputBox from './Components/OutputBox'
 import InputConversionService from './Services/inputConversionService'
 
@@ -14,7 +13,7 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <div className="App" id="app-wrapper" data-testid="app-wrapper">
       <header className="App-header">
         <p>Tablify</p>
         <CodeBox updateOutput={handleChange} />

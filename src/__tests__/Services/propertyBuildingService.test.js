@@ -8,6 +8,20 @@ describe( 'PropertyBuildingService Tests', () => {
     expect(expected).toEqual(actual);
     });
 
+    test('builds properties from strings remove empty lines', () => {
+    const input = ["public int a", "string b", "\n"]
+    const expected = [{propertyName: "a", propertyType: "int"},{propertyName: "b", propertyType: "string"}]
+    const actual = propertyBuildingService.buildProperties(input);
+    expect(expected).toEqual(actual);
+    });
+
+    test('builds properties from strings remove empty lines with whitespace', () => {
+        const input = ["public int a", "string b", " \n ", "bool c"]
+        const expected = [{propertyName: "a", propertyType: "int"},{propertyName: "b", propertyType: "string"},{propertyName: "c", propertyType: "bool"}]
+        const actual = propertyBuildingService.buildProperties(input);
+        expect(expected).toEqual(actual);
+        });
+
     test('splits string into parts', () => {
     const input = "public int thing"
     const expected = ["public", "int", "thing"]
