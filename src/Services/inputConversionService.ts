@@ -11,7 +11,7 @@ export default class InputConversionService {
   }
 
   static getClassName(input: string) {
-    const className = input.match('class ([^ ]*)')
+    const className = input.match(/(class[ ][a-zA-Z]*)/g)
     if (className !== null) {
       return className[0].replace('class ', '').trim()
     }

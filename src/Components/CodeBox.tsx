@@ -1,6 +1,10 @@
-import React, { ChangeEvent } from 'react'
+import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import TextField from '@material-ui/core/TextField'
+import Editor from 'react-simple-code-editor'
+import Prism from 'prismjs'
+import 'prismjs/themes/prism-okaidia.css'
+import 'prismjs/components/prism-clike'
+import 'prismjs/components/prism-csharp'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -8,23 +12,6 @@ const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(1),
       width: '25ch',
     },
-  },
-
-  cssLabel: {
-    color: '#95b2b8',
-  },
-
-  cssOutlinedInput: {
-    '&$cssFocused $notchedOutline': {
-      borderColor: `${theme.palette.primary.main} !important`,
-    },
-  },
-
-  cssFocused: {},
-
-  notchedOutline: {
-    borderWidth: '1px',
-    borderColor: '#95b2b8 !important',
   },
 }))
 
@@ -38,41 +25,31 @@ const CodeBox = ({ updateOutput, output, disabled }: CodeBoxProps) => {
   const classes = useStyles()
   const [value, setValue] = React.useState(output)
 
-  const handleChange = (event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+  const handleChange = (event: string) => {
     if (updateOutput) {
-      const inputValue = event.target.value
+      const inputValue = event
       setValue(inputValue)
       updateOutput(inputValue)
     }
   }
 
   const label = disabled ? 'Converted Code' : 'Paste Code Here'
+  const highlighter = (it: string) => Prism.highlight(it, Prism.languages.csharp, 'csharp')
 
   return (
     <div className={classes.root}>
-      <TextField
-        id={'outlined-multiline-static-code-box-' + disabled}
-        data-testid={'outlined-multiline-static-code-box' + disabled}
+      {label}
+      <Editor
+        id={'code-box-' + disabled}
+        data-testid={'code-box' + disabled}
         disabled={disabled}
-        label={label}
-        multiline={true}
-        rows={4}
-        variant="outlined"
         value={disabled ? output : value}
-        onChange={handleChange}
-        InputLabelProps={{
-          classes: {
-            root: classes.cssLabel,
-            focused: classes.cssFocused,
-          },
-        }}
-        InputProps={{
-          classes: {
-            root: classes.cssOutlinedInput,
-            focused: classes.cssFocused,
-            notchedOutline: classes.notchedOutline,
-          },
-          inputMode: 'text',
+        onValueChange={handleChange}
+        highlight={highlighter}
+        padding={10}
+        style={{
+          fontFamily: '"Fira code", "Fira Mono", monospace',
+          fontSize: 12,
         }}
       />
     </div>

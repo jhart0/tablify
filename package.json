@@ -14,9 +14,11 @@
     "@types/react": "^16.9.41",
     "@types/react-dom": "^16.9.8",
     "dotnet2sql": "^1.0.2",
+    "prismjs": "^1.20.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
+    "react-simple-code-editor": "^0.11.0",
     "typescript": "^3.9.6"
   },
   "scripts": {
@@ -50,6 +52,7 @@
     ]
   },
   "devDependencies": {
+    "@types/prismjs": "^1.16.1",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
     "material-ui": "^0.20.2",
