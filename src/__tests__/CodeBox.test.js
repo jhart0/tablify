@@ -15,7 +15,7 @@ const setState = jest.fn();
 
   beforeEach(() => {
     wrapperDisabled = shallow(<CodeBox updateOutput={handleChange} output={''} disabled={true}/>);
-    wrapperEnabled = shallow(<CodeBox updateOutput={null} output={''} disabled={false}/>);
+    wrapperEnabled = shallow(<CodeBox updateOutput={handleChange} output={''} disabled={false}/>);
   });
 
   afterEach(() => {
@@ -39,7 +39,7 @@ test('changes state of disabled text input box', () => {
 test('changes state of enabled text input box', () => {
   const event = 'a new value' 
   wrapperEnabled.find('#code-box-false').simulate('valueChange', event);
-   expect(setState).toHaveBeenCalledTimes(0);
+   expect(setState).toHaveBeenCalledTimes(1);
 });
 
 });

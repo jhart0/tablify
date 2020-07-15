@@ -13,7 +13,7 @@ export default class TableBuildingService {
   }
 
   static AddCreateTablePrefix(name: string) {
-    return 'create table ' + name + ' \n ('
+    return 'create table ' + name + '\n('
   }
 
   static AddPropertiesAsColumns(property: IProperty) {
@@ -25,6 +25,6 @@ export default class TableBuildingService {
   }
 
   static AddEndParenthesis(table: string) {
-    return table + ' \n )'
+    return table + '\n)'
   }
 }

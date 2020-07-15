@@ -78,4 +78,11 @@ test('sanitizes input into array of strings', () => {
     expect(expected).toEqual(actual);
   });
 
+  test('sanitizes basic class with mixed case auto properties in namespace into array of strings', () => {
+    const input = "public Namespace { public class {public int a {Get;Set;} \nprivate string b { get; set; } } }"
+    const expected = ["public int a", "private string b"]
+    const actual = inputParsingService.parseInputString(input);
+    expect(expected).toEqual(actual);
+  });
+
 });

@@ -33,11 +33,8 @@ export default class InputParsingService {
   }
 
   static removeAutoProperties(input: string[]) {
-    input = input.map((x) => {
-      return x.replace(/get;/g, '')
-    })
     return input.map((x) => {
-      return x.replace(/set;/g, '')
+      return x.replace(/[gGsS]et;/g, '')
     })
   }
 }

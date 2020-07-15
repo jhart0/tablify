@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 type CodeBoxProps = {
-  updateOutput: ((val: string) => void) | null
+  updateOutput: (val: string) => void
   output: string
   disabled: boolean
 }
@@ -26,11 +26,8 @@ const CodeBox = ({ updateOutput, output, disabled }: CodeBoxProps) => {
   const [value, setValue] = React.useState(output)
 
   const handleChange = (event: string) => {
-    if (updateOutput) {
-      const inputValue = event
-      setValue(inputValue)
-      updateOutput(inputValue)
-    }
+    setValue(event)
+    updateOutput(event)
   }
 
   const label = disabled ? 'Converted Code' : 'Paste Code Here'
