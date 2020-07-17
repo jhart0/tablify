@@ -7,6 +7,8 @@ export default class InputParsingService {
     input = this.removeBeforeBrace(input)
     input = this.removeBraces(input)
     let lines = this.splitLines(input)
+    lines = this.trimAllStrings(lines)
+    lines = this.removeNonPropertyLines(lines)
     lines = this.removeAutoProperties(lines)
     lines = this.trimAllStrings(lines)
     return lines
@@ -36,5 +38,25 @@ export default class InputParsingService {
     return input.map((x) => {
       return x.replace(/[gGsS]et;/g, '')
     })
+  }
+
+  static removeNonPropertyLines(input: string[]) {
+    // Region, Comment, Attribute, Usings
+    const stopPatterns = ['#', '//', '[', 'using ', '<']
+    const results = []
+    for (const i of input) {
+      let valid = true
+      for (const sp of stopPatterns) {
+        if (i.startsWith(sp)) {
+          valid = false
+          break
+        }
+      }
+      if (valid) {
+        results.push(i)
+      }
+    }
+
+    return results
   }
 }

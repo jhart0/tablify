@@ -44,4 +44,74 @@ test('returns empty from class definition if class not present', () => {
   expect(actual).toEqual(expected);
 });
 
+test('returns create table script from popular github repo (clean architecture)', () => {
+  const input = `namespace WebApi.ViewModels
+  {
+      using System;
+      using System.ComponentModel.DataAnnotations;
+      using Domain.Accounts.Credits;
+  
+      /// <summary>
+      ///     Credit.
+      /// </summary>
+      public sealed class CreditModel
+      {
+  
+          /// <summary>
+          ///     Gets Amount.
+          /// </summary>
+          [Required]
+          public Guid TransactionId { get; }
+  
+          /// <summary>
+          ///     Gets Amount.
+          /// </summary>
+          [Required]
+          public decimal Amount { get; }
+  
+          /// <summary>
+          ///     Gets Description.
+          /// </summary>
+          [Required]
+          public string Description { get; }
+  
+          /// <summary>
+          ///     Gets Transaction Date.
+          /// </summary>
+          [Required]
+          public DateTime TransactionDate { get; }
+      }
+  }`
+  const expected = "create table CreditModel\n(\nTransactionId uniqueidentifier,\nAmount decimal,\nDescription nvarchar,\nTransactionDate datetime\n)"
+  const actual = inputConversionService.convertToSql(input);
+  expect(actual).toEqual(expected);
+});
+
+test('returns create table script from popular github repo (crank)', () => {
+  const input = `// Licensed to the .NET Foundation under one or more agreements.
+  // The .NET Foundation licenses this file to you under the MIT license.
+  // See the LICENSE file in the project root for more information.
+  
+  using System;
+  using Newtonsoft.Json;
+  
+  namespace Microsoft.Crank.Models
+  {
+      public class Measurement
+      {
+          public string Delimiter = "$$Delimiter$$";
+  
+          public DateTime Timestamp { get; set; }
+          public string Name { get; set; }
+          public object Value { get; set; }
+  
+          [JsonIgnore]
+          public bool IsDelimiter => String.Equals(Name, Delimiter, StringComparison.OrdinalIgnoreCase);
+      }
+  }`
+  const expected = "create table Measurement\n(\nDelimiter nvarchar,\nTimestamp datetime,\nName nvarchar,\nValue undefined,\nIsDelimiter bit\n)"
+  const actual = inputConversionService.convertToSql(input);
+  expect(actual).toEqual(expected);
+});
+
 });

@@ -57,6 +57,13 @@ test('removes before first brace when multiple braces', () => {
     expect(expected).toEqual(actual);
   });
 
+  test('removes comments, attributes and usings from list', () => {
+    const input = ["#some region", "prop a {get; set;}", "//some comment", "[anAttribute]", "prop b {get;set;}", "using some.package"]
+    const expected = ["prop a {get; set;}", "prop b {get;set;}"]
+    const actual = inputParsingService.removeNonPropertyLines(input);
+    expect(expected).toEqual(actual);
+  });
+
 test('sanitizes input into array of strings', () => {
     const input = "public class {some text a {get;set;} \nsome text b { get; set; } }"
     const expected = ["some text a", "some text b"]

@@ -6,6 +6,9 @@ export default class PropertyBuildingService {
     for (let i of inputStrings) {
       i = i.trim()
       let parts = this.splitIntoPropertyFields(i)
+      if (parts.length > 3) {
+        parts = parts.slice(0, 3)
+      }
       if (parts.length === 3) {
         parts = this.removeAccessModifier(parts)
       }
