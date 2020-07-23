@@ -36,7 +36,7 @@
   "jest": {
     "coveragePathIgnorePatterns": [
       "serviceWorker.js",
-      "index.js"
+      "index.ts"
     ]
   },
   "browserslist": {

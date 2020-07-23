@@ -1,16 +1,14 @@
 import IProperty from '../Contracts/IProperty'
+import IInput from '../Contracts/IInput'
 
 export default class PropertyBuildingService {
-  static buildProperties(inputStrings: string[]) {
+  static buildProperties(inputStrings: IInput[]): IProperty[] {
     const properties: IProperty[] = []
-    for (let i of inputStrings) {
-      i = i.trim()
-      let parts = this.splitIntoPropertyFields(i)
-      if (parts.length > 3) {
-        parts = parts.slice(0, 3)
-      }
-      if (parts.length === 3) {
-        parts = this.removeAccessModifier(parts)
+    for (const i of inputStrings) {
+      i.inputValue = i.inputValue.trim()
+      let parts = this.splitIntoPropertyFields(i.inputValue)
+      if (parts.length > 2) {
+        parts = parts.slice(0, 2)
       }
       if (parts.length === 2) {
         properties.push(this.constructPropertyFromParts(parts))
@@ -22,10 +20,6 @@ export default class PropertyBuildingService {
 
   static splitIntoPropertyFields(input: string) {
     return input.split(' ')
-  }
-
-  static removeAccessModifier(input: string[]) {
-    return input.slice(1, 3)
   }
 
   static constructPropertyFromParts(input: string[]) {
