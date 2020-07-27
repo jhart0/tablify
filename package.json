@@ -52,11 +52,16 @@
     ]
   },
   "devDependencies": {
+    "@aws-cdk/assert": "^1.54.0",
+    "@aws-cdk/aws-route53-targets": "^1.54.0",
+    "@aws-cdk/aws-s3-deployment": "^1.54.0",
+    "@aws-cdk/core": "1.54.0",
     "@types/prismjs": "^1.16.1",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
     "material-ui": "^0.20.2",
     "prettier": "^2.0.5",
+    "source-map-support": "^0.5.16",
     "tslint": "^6.1.2",
     "tslint-config-prettier": "^1.18.0",
     "tslint-plugin-prettier": "^2.3.0",
