@@ -18,11 +18,11 @@ export default class PropertyBuildingService {
     return properties
   }
 
-  static splitIntoPropertyFields(input: string) {
+  static splitIntoPropertyFields(input: string): string[] {
     return input.split(' ')
   }
 
-  static constructPropertyFromParts(input: string[]) {
+  static constructPropertyFromParts(input: string[]): IProperty {
     const property: IProperty = {
       propertyName: input[1].trim(),
       propertyType: input[0].trim(),

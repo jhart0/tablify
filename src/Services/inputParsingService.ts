@@ -1,7 +1,7 @@
 import IInput from '../Contracts/IInput'
 
 export default class InputParsingService {
-  static parseInputString(input: IInput) {
+  static parseInputString(input: IInput): IInput[] {
     if (input.inputValue.toLowerCase().includes('namespace')) {
       input = this.removeBeforeBrace(input)
       input = this.removeBrace(input)

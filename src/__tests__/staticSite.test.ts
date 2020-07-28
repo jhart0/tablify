@@ -1,6 +1,7 @@
 import { SynthUtils } from '@aws-cdk/assert'
 import * as cdk from '@aws-cdk/core'
 import * as staticSite from '../staticSite'
+import '@aws-cdk/assert/jest'
 
 test('static site creates bucket', () => {
   const app = new cdk.App()
