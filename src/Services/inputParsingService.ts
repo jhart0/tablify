@@ -1,12 +1,15 @@
 import IInput from '../Contracts/IInput'
 
 export default class InputParsingService {
-  static parseInputString(input: IInput): IInput[] {
+  static parseInputString(tableName: string, input: IInput): IInput[] {
     if (input.inputValue.toLowerCase().includes('namespace')) {
       input = this.removeBeforeBrace(input)
       input = this.removeBrace(input)
     }
     input = this.removeBeforeBrace(input)
+    if (input.inputValue.toLowerCase().includes(tableName.toLowerCase())) {
+      input = this.removeConstructor(tableName, input)
+    }
     input = this.removeBraces(input)
     let lines = this.splitLines(input)
     lines = this.trimAllStrings(lines)
@@ -87,17 +90,28 @@ export default class InputParsingService {
     const results = []
     for (const i of input) {
       let valid = true
-      for (const sp of stopPatterns) {
-        if (i.inputValue.startsWith(sp)) {
-          valid = false
-          break
+      if (i.inputValue.match(/<.*?>/g)) {
+        valid = false
+      } else {
+        for (const sp of stopPatterns) {
+          if (i.inputValue.startsWith(sp)) {
+            valid = false
+            break
+          }
         }
-      }
-      if (valid) {
-        results.push(i)
+        if (valid) {
+          results.push(i)
+        }
       }
     }
 
     return results
+  }
+
+  static removeConstructor(name: string, input: IInput): IInput {
+    const exp = new RegExp(`(${name}.*?})`, 's')
+    input.inputValue = input.inputValue.replace(exp, '')
+
+    return input
   }
 }

@@ -15,6 +15,15 @@ describe('InputParsingService Tests', () => {
     expect(expected).toEqual(actual)
   })
 
+  test('removes constructor', () => {
+    const expected = { inputValue: 'public class  some text}' }
+    const input = {
+      inputValue: 'public class blah { public blah(someProp) { text = someProp} some text}',
+    }
+    const actual = inputParsingService.removeConstructor('blah', input)
+    expect(expected).toEqual(actual)
+  })
+
   test('removes one brace', () => {
     const expected = { inputValue: 'some {text}}' }
     const input = { inputValue: '{some {text}}' }
@@ -95,7 +104,7 @@ describe('InputParsingService Tests', () => {
       inputValue: 'public class {some text a {get;set;} \nsome text b { get; set; } }',
     }
     const expected = [{ inputValue: 'some text a' }, { inputValue: 'some text b' }]
-    const actual = inputParsingService.parseInputString(input)
+    const actual = inputParsingService.parseInputString('test', input)
     expect(expected).toEqual(actual)
   })
 
@@ -104,7 +113,7 @@ describe('InputParsingService Tests', () => {
       inputValue: 'public class {public int a {get;set;} \nprivate string b { get; set; } }',
     }
     const expected = [{ inputValue: 'int a' }, { inputValue: 'string b' }]
-    const actual = inputParsingService.parseInputString(input)
+    const actual = inputParsingService.parseInputString('test', input)
     expect(expected).toEqual(actual)
   })
 
@@ -114,7 +123,7 @@ describe('InputParsingService Tests', () => {
         'public Namespace { public class {public int a {get;set;} \nprivate string b { get; set; } } }',
     }
     const expected = [{ inputValue: 'int a' }, { inputValue: 'string b' }]
-    const actual = inputParsingService.parseInputString(input)
+    const actual = inputParsingService.parseInputString('test', input)
     expect(expected).toEqual(actual)
   })
 
@@ -124,7 +133,7 @@ describe('InputParsingService Tests', () => {
         'public Namespace { public class {public int a {Get;Set;} \nprivate string b { get; set; } } }',
     }
     const expected = [{ inputValue: 'int a' }, { inputValue: 'string b' }]
-    const actual = inputParsingService.parseInputString(input)
+    const actual = inputParsingService.parseInputString('test', input)
     expect(expected).toEqual(actual)
   })
 })

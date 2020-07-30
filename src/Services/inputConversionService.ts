@@ -5,7 +5,9 @@ import propertyBuildingService from './propertyBuildingService'
 export default class InputConversionService {
   static convertToSql(input: string): string {
     const tableName = this.getClassName(input)
-    const parsedInput = inputParsingService.parseInputString({ inputValue: input.trim() })
+    const parsedInput = inputParsingService.parseInputString(tableName, {
+      inputValue: input.trim(),
+    })
     const constructedProperties = propertyBuildingService.buildProperties(parsedInput)
     return tableBuildingService.BuildTableFromProperties(tableName, constructedProperties)
   }
