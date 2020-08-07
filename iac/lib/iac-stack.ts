@@ -5,16 +5,16 @@ import * as s3deploy from '@aws-cdk/aws-s3-deployment'
 import * as acm from '@aws-cdk/aws-certificatemanager'
 import * as cdk from '@aws-cdk/core'
 import * as targets from '@aws-cdk/aws-route53-targets/lib'
-import { Construct } from '@aws-cdk/core'
 
 export interface StaticSiteProps {
   domainName: string
   siteSubDomain: string
+  staticContentPath: string
 }
 
-export class StaticSite extends Construct {
-  constructor(parent: Construct, name: string, props: StaticSiteProps) {
-    super(parent, name)
+export class StaticSite extends cdk.Construct {
+  constructor(scope: cdk.Stack, id: string, props: StaticSiteProps & cdk.StackProps) {
+    super(scope, id)
 
     const zone = route53.HostedZone.fromLookup(this, 'Zone', { domainName: props.domainName })
     const siteDomain = props.siteSubDomain + '.' + props.domainName
@@ -70,7 +70,7 @@ export class StaticSite extends Construct {
 
     // tslint:disable-next-line: no-unused-expression
     new s3deploy.BucketDeployment(this, 'tablify-prod-deployment', {
-      sources: [s3deploy.Source.asset('build')],
+      sources: [s3deploy.Source.asset(props.staticContentPath)],
       destinationBucket: siteBucket,
       distribution,
       distributionPaths: ['/*'],

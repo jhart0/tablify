@@ -116,7 +116,7 @@ describe('InputConversionService Tests', () => {
       }
   }`
     const expected =
-      'create table Measurement\n(\nDelimiter nvarchar,\nTimestamp datetime,\nName nvarchar,\nValue undefined,\nIsDelimiter bit\n)'
+      'create table Measurement\n(\nDelimiter nvarchar,\nTimestamp datetime,\nName nvarchar,\nValue nvarchar,\nIsDelimiter bit\n)'
     const actual = inputConversionService.convertToSql(input)
     expect(actual).toEqual(expected)
   })
@@ -154,7 +154,7 @@ describe('InputConversionService Tests', () => {
         }
     } `
     const expected =
-      'create table PartialViewMacroModel\n(\nContent undefined,\nMacroName nvarchar,\nMacroAlias nvarchar,\nMacroId int\n)'
+      'create table PartialViewMacroModel\n(\nContent nvarchar,\nMacroName nvarchar,\nMacroAlias nvarchar,\nMacroId int\n)'
     const actual = inputConversionService.convertToSql(input)
     expect(actual).toEqual(expected)
   })
