@@ -6,3 +6,13 @@
 # Tablify
 
 Create SQL Tables from C# Models
+
+## Tests
+
+100% Unit Test Coverage. Run npm ci-test for non watch tests & coverage output
+
+## IaC
+
+cd to iac and then use the following to preview deployment
+
+`cdk synth -c domain=tablify.net -c subdomain=www` 
