@@ -109,7 +109,7 @@ export default class InputParsingService {
   }
 
   static removeConstructor(name: string, input: IInput): IInput {
-    const exp = new RegExp(`(${name}.*?})`, 's')
+    const exp = new RegExp(`(${name}\\(.*?})`, 's')
     input.inputValue = input.inputValue.replace(exp, '')
 
     return input

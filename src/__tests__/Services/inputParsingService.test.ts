@@ -16,7 +16,7 @@ describe('InputParsingService Tests', () => {
   })
 
   test('removes constructor', () => {
-    const expected = { inputValue: 'public class  some text}' }
+    const expected = { inputValue: 'public class blah { public  some text}' }
     const input = {
       inputValue: 'public class blah { public blah(someProp) { text = someProp} some text}',
     }

@@ -9,6 +9,14 @@ describe('InputConversionService Tests', () => {
     expect(actual).toEqual(expected)
   })
 
+  test('returns create table script with primary key', () => {
+    const input =
+      'public class test \n{public int thing {get;set;}\npublic string thingB {get;set;}\npublic int testId {get;set;}}'
+    const expected = 'create table test\n(\nthing int,\nthingB nvarchar,\ntestId int,\nconstraint pk_test primary key (testId)\n)'
+    const actual = inputConversionService.convertToSql(input)
+    expect(actual).toEqual(expected)
+  })
+
   test('returns create table script when class has namespace', () => {
     const input =
       'namespace someAssembly {\n public class test \n{public int thing {get;set;}\npublic string thingB {get;set;}\n}\n}'

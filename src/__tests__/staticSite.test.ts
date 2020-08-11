@@ -27,7 +27,7 @@ describe('IaC Tests', () => {
   test('static site creates cloudfront distribution', () => {
     expect(stack).toHaveResource('AWS::CloudFront::Distribution', {
       DistributionConfig: {
-        Aliases: ['www.test.com'],
+        Aliases: ['test.com', 'www.test.com'],
         DefaultCacheBehavior: {
           AllowedMethods: ['GET', 'HEAD'],
           CachedMethods: ['GET', 'HEAD'],

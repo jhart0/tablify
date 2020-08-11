@@ -31,9 +31,10 @@ export class StaticSite extends cdk.Construct {
     new cdk.CfnOutput(this, 'Bucket', { value: siteBucket.bucketName })
 
     const certificateArn = new acm.DnsValidatedCertificate(this, 'tablify-prod-cert', {
-      domainName: siteDomain,
+      domainName: props.domainName,
       hostedZone: zone,
       region: 'us-east-1',
+      subjectAlternativeNames: ['*.' + props.domainName],
     }).certificateArn
     // tslint:disable-next-line: no-unused-expression
     new cdk.CfnOutput(this, 'Certificate', { value: certificateArn })
@@ -44,7 +45,7 @@ export class StaticSite extends cdk.Construct {
       {
         aliasConfiguration: {
           acmCertRef: certificateArn,
-          names: [siteDomain],
+          names: [props.domainName, siteDomain],
           sslMethod: cloudfront.SSLMethod.SNI,
           securityPolicy: cloudfront.SecurityPolicyProtocol.TLS_V1_1_2016,
         },
@@ -62,8 +63,15 @@ export class StaticSite extends cdk.Construct {
     new cdk.CfnOutput(this, 'DistributionId', { value: distribution.distributionId })
 
     // tslint:disable-next-line: no-unused-expression
-    new route53.ARecord(this, 'tablify-prod-dns', {
+    new route53.ARecord(this, 'tablify-prod-dns-apex', {
       recordName: siteDomain,
+      target: route53.RecordTarget.fromAlias(new targets.CloudFrontTarget(distribution)),
+      zone,
+    })
+
+    // tslint:disable-next-line: no-unused-expression
+    new route53.ARecord(this, 'tablify-prod-dns', {
+      recordName: props.domainName,
       target: route53.RecordTarget.fromAlias(new targets.CloudFrontTarget(distribution)),
       zone,
     })
