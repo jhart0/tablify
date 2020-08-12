@@ -21,8 +21,8 @@ export class StaticSite extends cdk.Construct {
     // tslint:disable-next-line: no-unused-expression
     new cdk.CfnOutput(this, 'Site', { value: 'https://' + siteDomain })
 
-    const siteBucket = new s3.Bucket(this, 'tablify-prod-bucket', {
-      bucketName: siteDomain,
+    const siteBucket = new s3.Bucket(this, 'tablify-bucket', {
+      bucketName: 'tablify-static',
       websiteIndexDocument: 'index.html',
       websiteErrorDocument: 'error.html',
       publicReadAccess: true,
@@ -30,7 +30,7 @@ export class StaticSite extends cdk.Construct {
     // tslint:disable-next-line: no-unused-expression
     new cdk.CfnOutput(this, 'Bucket', { value: siteBucket.bucketName })
 
-    const certificateArn = new acm.DnsValidatedCertificate(this, 'tablify-prod-cert', {
+    const certificateArn = new acm.DnsValidatedCertificate(this, 'tablify-cert', {
       domainName: props.domainName,
       hostedZone: zone,
       region: 'us-east-1',
@@ -41,7 +41,7 @@ export class StaticSite extends cdk.Construct {
 
     const distribution = new cloudfront.CloudFrontWebDistribution(
       this,
-      'tablify-prod-distribution',
+      'tablify-distribution',
       {
         aliasConfiguration: {
           acmCertRef: certificateArn,
@@ -63,21 +63,21 @@ export class StaticSite extends cdk.Construct {
     new cdk.CfnOutput(this, 'DistributionId', { value: distribution.distributionId })
 
     // tslint:disable-next-line: no-unused-expression
-    new route53.ARecord(this, 'tablify-prod-dns-apex', {
+    new route53.ARecord(this, 'tablify-dns-apex', {
       recordName: siteDomain,
       target: route53.RecordTarget.fromAlias(new targets.CloudFrontTarget(distribution)),
       zone,
     })
 
     // tslint:disable-next-line: no-unused-expression
-    new route53.ARecord(this, 'tablify-prod-dns', {
+    new route53.ARecord(this, 'tablify-dns', {
       recordName: props.domainName,
       target: route53.RecordTarget.fromAlias(new targets.CloudFrontTarget(distribution)),
       zone,
     })
 
     // tslint:disable-next-line: no-unused-expression
-    new s3deploy.BucketDeployment(this, 'tablify-prod-deployment', {
+    new s3deploy.BucketDeployment(this, 'tablify-deployment', {
       sources: [s3deploy.Source.asset(props.staticContentPath)],
       destinationBucket: siteBucket,
       distribution,

@@ -16,7 +16,7 @@ describe('IaC Tests', () => {
 
   test('static site creates bucket', () => {
     expect(stack).toHaveResource('AWS::S3::Bucket', {
-      BucketName: 'www.test.com',
+      BucketName: 'tablify-static',
       WebsiteConfiguration: {
         IndexDocument: 'index.html',
         ErrorDocument: 'error.html',
@@ -50,7 +50,7 @@ describe('IaC Tests', () => {
             ConnectionAttempts: 3,
             ConnectionTimeout: 10,
             DomainName: {
-              'Fn::GetAtt': ['testStaticSitetablifyprodbucketEBCA2C99', 'RegionalDomainName'],
+              'Fn::GetAtt': ['testStaticSitetablifybucket4BD9BB40', 'RegionalDomainName'],
             },
             Id: `origin1`,
             S3OriginConfig: {},
@@ -60,7 +60,7 @@ describe('IaC Tests', () => {
         ViewerCertificate: {
           AcmCertificateArn: {
             'Fn::GetAtt': [
-              'testStaticSitetablifyprodcertCertificateRequestorResource3A3455F6',
+              'testStaticSitetablifycertCertificateRequestorResourceDBA97FE8',
               'Arn',
             ],
           },

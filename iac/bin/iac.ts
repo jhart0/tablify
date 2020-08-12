@@ -4,7 +4,7 @@ import * as cdk from '@aws-cdk/core';
 import { StaticSite } from '../lib/iac-stack';
 
 const app = new cdk.App();
-const stack = new cdk.Stack(app, 'testStack', {
+const stack = new cdk.Stack(app, 'tablify', {
     env: { account: '500007353523', region: 'eu-west-1' },
   })
 new StaticSite(stack, 'tablify-prod-static-site', {
