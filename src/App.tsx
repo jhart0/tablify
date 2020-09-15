@@ -11,7 +11,7 @@ function App() {
 
   const tableInit = `create table foo
 (
-    bar int
+  bar int
 )`
 
   const [classDef, setClass] = React.useState(classInit)

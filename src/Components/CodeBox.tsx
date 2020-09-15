@@ -30,7 +30,7 @@ const CodeBox = ({ updateOutput, output, disabled }: CodeBoxProps) => {
     updateOutput(event)
   }
 
-  const label = disabled ? 'Converted Code' : 'Paste Code Here'
+  const label = disabled ? 'Converted SQL Table' : 'Paste C# Class Here'
   const highlighter = (it: string) => Prism.highlight(it, Prism.languages.csharp, 'csharp')
 
   return (

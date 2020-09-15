@@ -5,13 +5,13 @@ export default class TableBuildingService {
   static BuildTableFromProperties(name: string, properties: IProperty[]): string {
     let definition = this.AddCreateTablePrefix(name)
     for (const property of properties) {
-      definition = definition + '\n' + this.AddPropertiesAsColumns(property) + ','
+      definition = definition + '\n\t' + this.AddPropertiesAsColumns(property) + ','
     }
     const pk = this.TryCreatePrimaryKey(name, properties)
     if (pk === '') {
       definition = definition.substring(0, definition.length - 1)
     } else {
-      definition = definition + '\n' + pk
+      definition = definition + '\n\t' + pk
     }
     definition = this.AddEndParenthesis(definition)
     return definition

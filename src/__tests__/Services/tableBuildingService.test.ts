@@ -6,7 +6,7 @@ describe('TableBuildingService Tests', () => {
       { propertyName: 'thing', propertyType: 'int' },
       { propertyName: 'thingB', propertyType: 'string' },
     ]
-    const expected = 'create table test\n(\nthing int,\nthingB nvarchar\n)'
+    const expected = 'create table test\n(\n\tthing int,\n\tthingB nvarchar\n)'
     const actual = tableBuildingService.BuildTableFromProperties('test', input)
     expect(expected).toEqual(actual)
   })
@@ -18,7 +18,7 @@ describe('TableBuildingService Tests', () => {
       { propertyName: 'testId', propertyType: 'int' },
     ]
     const expected =
-      'create table test\n(\nthing int,\nthingB nvarchar,\ntestId int,\nconstraint pk_test primary key (testId)\n)'
+      'create table test\n(\n\tthing int,\n\tthingB nvarchar,\n\ttestId int,\n\tconstraint pk_test primary key (testId)\n)'
     const actual = tableBuildingService.BuildTableFromProperties('test', input)
     expect(expected).toEqual(actual)
   })

@@ -29,7 +29,7 @@ describe('App Tests', () => {
   test('changes state of model to table', () => {
     const event = 'public class foo\n{ public int bar {get;set;}\n}'
     wrapper.find('[data-testid="input-box"]').prop('updateOutput')(event)
-    expect(setClass).toHaveBeenCalledWith('create table foo\n(\nbar int\n)')
+    expect(setClass).toHaveBeenCalledWith('create table foo\n(\n\tbar int\n)')
   })
 
   test('changes state of disabled text input box', () => {

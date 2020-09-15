@@ -4,7 +4,7 @@ describe('InputConversionService Tests', () => {
   test('returns create table script', () => {
     const input =
       'public class test \n{public int thing {get;set;}\npublic string thingB {get;set;}}'
-    const expected = 'create table test\n(\nthing int,\nthingB nvarchar\n)'
+    const expected = 'create table test\n(\n\tthing int,\n\tthingB nvarchar\n)'
     const actual = inputConversionService.convertToSql(input)
     expect(actual).toEqual(expected)
   })
@@ -12,7 +12,7 @@ describe('InputConversionService Tests', () => {
   test('returns create table script with primary key', () => {
     const input =
       'public class test \n{public int thing {get;set;}\npublic string thingB {get;set;}\npublic int testId {get;set;}}'
-    const expected = 'create table test\n(\nthing int,\nthingB nvarchar,\ntestId int,\nconstraint pk_test primary key (testId)\n)'
+    const expected = 'create table test\n(\n\tthing int,\n\tthingB nvarchar,\n\ttestId int,\n\tconstraint pk_test primary key (testId)\n)'
     const actual = inputConversionService.convertToSql(input)
     expect(actual).toEqual(expected)
   })
@@ -20,7 +20,7 @@ describe('InputConversionService Tests', () => {
   test('returns create table script when class has namespace', () => {
     const input =
       'namespace someAssembly {\n public class test \n{public int thing {get;set;}\npublic string thingB {get;set;}\n}\n}'
-    const expected = 'create table test\n(\nthing int,\nthingB nvarchar\n)'
+    const expected = 'create table test\n(\n\tthing int,\n\tthingB nvarchar\n)'
     const actual = inputConversionService.convertToSql(input)
     expect(actual).toEqual(expected)
   })
@@ -28,7 +28,7 @@ describe('InputConversionService Tests', () => {
   test('returns create table script when class has namespace and excess whitespace', () => {
     const input =
       'namespace  someAssembly {\n public  class test  \n{ public int thing {get; set;} \npublic string thingB {get;set;}\n }\n} \n'
-    const expected = 'create table test\n(\nthing int,\nthingB nvarchar\n)'
+    const expected = 'create table test\n(\n\tthing int,\n\tthingB nvarchar\n)'
     const actual = inputConversionService.convertToSql(input)
     expect(actual).toEqual(expected)
   })
@@ -96,7 +96,7 @@ describe('InputConversionService Tests', () => {
       }
   }`
     const expected =
-      'create table CreditModel\n(\nTransactionId uniqueidentifier,\nAmount decimal,\nDescription nvarchar,\nTransactionDate datetime\n)'
+      'create table CreditModel\n(\n\tTransactionId uniqueidentifier,\n\tAmount decimal,\n\tDescription nvarchar,\n\tTransactionDate datetime\n)'
     const actual = inputConversionService.convertToSql(input)
     expect(actual).toEqual(expected)
   })
@@ -124,7 +124,7 @@ describe('InputConversionService Tests', () => {
       }
   }`
     const expected =
-      'create table Measurement\n(\nDelimiter nvarchar,\nTimestamp datetime,\nName nvarchar,\nValue nvarchar,\nIsDelimiter bit\n)'
+      'create table Measurement\n(\n\tDelimiter nvarchar,\n\tTimestamp datetime,\n\tName nvarchar,\n\tValue nvarchar,\n\tIsDelimiter bit\n)'
     const actual = inputConversionService.convertToSql(input)
     expect(actual).toEqual(expected)
   })
@@ -162,7 +162,7 @@ describe('InputConversionService Tests', () => {
         }
     } `
     const expected =
-      'create table PartialViewMacroModel\n(\nContent nvarchar,\nMacroName nvarchar,\nMacroAlias nvarchar,\nMacroId int\n)'
+      'create table PartialViewMacroModel\n(\n\tContent nvarchar,\n\tMacroName nvarchar,\n\tMacroAlias nvarchar,\n\tMacroId int\n)'
     const actual = inputConversionService.convertToSql(input)
     expect(actual).toEqual(expected)
   })
