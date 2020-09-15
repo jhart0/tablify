@@ -47,6 +47,7 @@ const CodeBox = ({ updateOutput, output, disabled }: CodeBoxProps) => {
         style={{
           fontFamily: '"Fira code", "Fira Mono", monospace',
           fontSize: 12,
+          tabSize: 4,
         }}
       />
     </div>
