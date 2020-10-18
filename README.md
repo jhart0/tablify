@@ -4,7 +4,7 @@
 
 # Tablify
 
-Create SQL Tables from C# Models: [https://www.tablify.net](tablify.net)
+Create SQL Tables from C# Models: [tablify.net](https://www.tablify.net)
 
 ## Tests
 
